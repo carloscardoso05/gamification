@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: Gamification
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username:
+    password:
+    url: 'jdbc:postgresql://localhost:5432/quiz_edu'
+    driver-class-name: org.postgresql.Driver
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: debug
