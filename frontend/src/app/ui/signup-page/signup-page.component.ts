@@ -33,6 +33,7 @@ export class SignupPageComponent {
     email: '',
     password: '',
     name: '',
+    socialName: '',
   };
 
   togglePasswordVisibility(): void {
