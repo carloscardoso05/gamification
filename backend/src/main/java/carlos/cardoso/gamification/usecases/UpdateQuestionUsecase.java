@@ -1,10 +1,11 @@
 package carlos.cardoso.gamification.usecases;
 
 import carlos.cardoso.gamification.annotations.UseCase;
-import carlos.cardoso.gamification.dtos.question.CreateQuestionResponse;
 import carlos.cardoso.gamification.dtos.question.UpdateQuestionRequest;
 import carlos.cardoso.gamification.dtos.question.UpdateQuestionResponse;
-import carlos.cardoso.gamification.entities.*;
+import carlos.cardoso.gamification.entities.Answer;
+import carlos.cardoso.gamification.entities.Question;
+import carlos.cardoso.gamification.entities.QuestionId;
 import carlos.cardoso.gamification.exceptions.ResourceNotFoundException;
 import carlos.cardoso.gamification.repositories.QuestionRepository;
 import carlos.cardoso.gamification.repositories.QuizRepository;
@@ -15,7 +16,6 @@ import java.util.List;
 @UseCase
 @RequiredArgsConstructor
 public class UpdateQuestionUsecase {
-    private final QuizRepository quizRepository;
     private final QuestionRepository questionRepository;
 
     public UpdateQuestionResponse execute(QuestionId questionId, UpdateQuestionRequest request) {
