@@ -12,6 +12,11 @@ export class AuthService {
     effect(() => {
       if (this._auth() == null) this._user.set(null);
     });
+
+    const auth = this.retrieveAuth();
+    if (auth) {
+      queueMicrotask(() => this.login(auth));
+    }
   }
 
   private readonly http = inject(HttpClient);
