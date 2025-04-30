@@ -1,0 +1,80 @@
+<fieldset
+  class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+>
+  <legend class="fieldset-legend">Registre-se</legend>
+
+  <label>Nome</label>
+  <input
+    type="text"
+    class="input"
+    placeholder="Nome"
+    required
+    [minlength]="2"
+    [pattern]="`^[a-zA-Z\\s'.]*$`"
+    [(ngModel)]="signup.name"
+    #name="ngModel"
+  />
+  @if (name.invalid && (name.dirty || name.touched)) { @if
+  (name.hasError('required')) {
+  <p class="text-red-400">Nome é obrigatório</p>
+  } @if (name.hasError('minlength')) {
+  <p class="text-red-400">Nome deve ter no mínimo 2 caracteres</p>
+  } @if (name.hasError('pattern')) {
+  <p class="text-red-400">Nome inválido</p>
+  }}
+
+  <label class="label">Email</label>
+  <input
+    type="email"
+    class="input"
+    placeholder="Email"
+    required
+    email
+    [(ngModel)]="signup.email"
+    #email="ngModel"
+  />
+  @if (email.invalid && (email.dirty || email.touched)) { @if
+  (email.hasError('required')) {
+  <p class="text-red-400">Email é obrigatório</p>
+  } @if (email.hasError('email')) {
+  <p class="text-red-400">Email inválido</p>
+  } }
+
+  <label class="label">Senha</label>
+  <div class="join join-horizontal">
+    <input
+      [type]="showPassword() ? 'text' : 'password'"
+      class="input join-item"
+      placeholder="Senha"
+      required
+      minlength="6"
+      [(ngModel)]="signup.password"
+      #password="ngModel"
+    />
+    <button
+      type="button"
+      (click)="togglePasswordVisibility()"
+      class="btn btn-square join-item"
+    >
+      <lucide-icon [img]="showPassword() ? Eye : EyeClosed" />
+    </button>
+  </div>
+  @if (password.invalid && (password.dirty || password.touched)) { @if
+  (password.hasError('required')) {
+  <p class="text-red-400">Senha é obrigatória</p>
+  } @if (password.hasError('minlength')) {
+  <p class="text-red-400">Senha deve ter no mínimo 6 caracteres</p>
+  } }
+  <button
+    type="button"
+    class="btn btn-neutral mt-4"
+    [disabled]="name.invalid || password.invalid || email.invalid"
+    (click)="submit()"
+  >
+    Registrar
+  </button>
+  <p class="mt-2">
+    Já tem uma conta?
+    <a class="link" href="login">Entre aqui</a>
+  </p>
+</fieldset>

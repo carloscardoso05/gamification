@@ -1,0 +1,24 @@
+@if (loading()) {
+  <div class="loading">Carregando...</div>
+} @else if (error()) {
+<div class="error">
+    <p>Erro ao carregar os quizzes: {{ error() }}</p>
+</div>
+} @else if (quizzes().length === 0) {
+  <div class="empty-state">Nenhum quiz encontrado.</div>
+} @else {
+  <div class="quiz-grid">
+    @for (quiz of quizzes(); track quiz.id) {
+      <div class="quiz-card">
+        <h3 class="quiz-title">{{ quiz.title }}</h3>
+        <p class="quiz-description">{{ quiz.description }}</p>
+        <div class="quiz-meta">
+          <p class="questions-count">{{ quiz.questions_count }} pergunta(s)</p>
+          <p class="quiz-date">Criado em: {{ quiz.created_at | date:'dd/MM/yyyy' }}</p>
+          <p class="quiz-owner">Por: {{ quiz.owner.name }}</p>
+        </div>
+        <button class="view-quiz-button" [routerLink]="['/quizzes', quiz.id]">Ver Quiz</button>
+      </div>
+    }
+  </div>
+}

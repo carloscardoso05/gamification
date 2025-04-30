@@ -1,0 +1,57 @@
+<fieldset
+  class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+>
+  <legend class="fieldset-legend">Login</legend>
+
+  <label class="label">Email</label>
+  <input
+    type="email"
+    class="input"
+    placeholder="Email"
+    required
+    email
+    [(ngModel)]="auth.email"
+    #email="ngModel"
+  />
+  @if (email.invalid && (email.dirty || email.touched)) { @if
+  (email.hasError('required')) {
+  <p class="text-red-400">Email é obrigatório</p>
+  } @if (email.hasError('email')) {
+  <p class="text-red-400">Email inválido</p>
+  } }
+
+  <label class="label">Senha</label>
+  <div class="join join-horizontal">
+    <input
+      [type]="showPassword() ? 'text' : 'password'"
+      class="input join-item"
+      placeholder="Senha"
+      required
+      [(ngModel)]="auth.password"
+      #password="ngModel"
+    />
+    <button
+      type="button"
+      (click)="togglePasswordVisibility()"
+      class="btn btn-square join-item"
+    >
+      <lucide-icon [img]="showPassword() ? Eye : EyeClosed" />
+    </button>
+  </div>
+  @if (password.invalid && (password.dirty || password.touched)) { @if
+  (password.hasError('required')) {
+  <p class="text-red-400">Senha é obrigatória</p>
+  }}
+  <button
+    type="submit"
+    class="btn btn-neutral mt-4"
+    [disabled]="email.invalid || password.invalid"
+    (click)="login()"
+  >
+    Entrar
+  </button>
+  <p class="mt-2">
+    Não tem uma conta?
+    <a class="link" href="signup">Crie agora</a>
+  </p>
+</fieldset>
